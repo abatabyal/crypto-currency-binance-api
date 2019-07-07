@@ -6,6 +6,8 @@ package com.crypto.currency;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.print.DocFlavor.STRING;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +50,11 @@ public class DepthEvents {
 		List<BtcPairs> btcPairList = new ArrayList<BtcPairs>();
 		for (TickerPrice tickerPrice : allPrices) {
 			System.out.println(tickerPrice.getSymbol());
-			btcPairList.add(new BtcPairs(tickerPrice.getSymbol()));	
+			String symbolName = tickerPrice.getSymbol();
+			String lastChars = symbolName.substring(symbolName.length() - 3);
+			if (lastChars.equals("BTC")) {
+				btcPairList.add(new BtcPairs(tickerPrice.getSymbol()));	
+			}
 		}
 		btcPairsBulkRepository.saveAll(btcPairList);
 	}

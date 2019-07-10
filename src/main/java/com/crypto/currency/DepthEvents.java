@@ -70,6 +70,10 @@ public class DepthEvents {
 		Iterable<BtcPairs> btcPairs = btcPairsRepository.findAll();
 		System.out.println("Fetching All Pairs");
 		
+		/**
+		 * Iterates through all the saved XYZBTC pairs to get the updates
+		 *
+		 */
 		for(BtcPairs btcPair: btcPairs) {
 			System.out.println("Fetching Data for " + btcPair.getBtcPair());
 			new DepthCache(btcPair.getBtcPair());

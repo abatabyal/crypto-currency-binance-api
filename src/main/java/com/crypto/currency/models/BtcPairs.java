@@ -19,6 +19,10 @@ public class BtcPairs {
 	@Column(name="btc_pair")
 	private String btcPair;
 	
+	public BtcPairs() {
+		super();
+	}
+
 	public BtcPairs(String btcPair) {
 		super();
 		this.setBtcPair(btcPair);

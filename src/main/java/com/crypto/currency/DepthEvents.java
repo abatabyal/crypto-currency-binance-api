@@ -59,5 +59,23 @@ public class DepthEvents {
 		btcPairsBulkRepository.saveAll(btcPairList);
 	}
 	
+	@RequestMapping(value = "/cache_depth_events", method= RequestMethod.GET)
+	public void cache_depth_events() {
+		
+		/**
+		 * Prints the cached order book / depth of a symbol as well as the best ask and
+		 * bid price in the book.
+		 */
+		//get a list of btc pairs
+		Iterable<BtcPairs> btcPairs = btcPairsRepository.findAll();
+		System.out.println("Fetching All Pairs");
+		
+		for(BtcPairs btcPair: btcPairs) {
+			System.out.println("Fetching Data for " + btcPair.getBtcPair());
+			new DepthCache(btcPair.getBtcPair());
+		}
+		//new DepthCache("BNBBTC");
+	}
+	
 
 }
